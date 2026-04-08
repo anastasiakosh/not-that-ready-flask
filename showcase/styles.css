@@ -1,0 +1,92 @@
+body, html { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  background: #0a0a0a; 
+}
+
+.showcase-section {
+  color: #ffffff;
+  padding: 6rem 2rem;
+  font-family: 'Helvetica Neue', sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.showcase-header h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-buttons button {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background: #333;
+}
+
+.showcase-track {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 2rem;
+  /* Native smooth snapping carousel */
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth; /* Required for JS smooth scroll */
+}
+
+.showcase-track::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.showcase-card {
+  flex: 0 0 350px;
+  height: 450px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid #333;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.showcase-card:hover { 
+  background: #222; 
+}
+
+@media (max-width: 768px) {
+  .showcase-card { flex: 0 0 280px; height: 380px; }
+  .showcase-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+}
