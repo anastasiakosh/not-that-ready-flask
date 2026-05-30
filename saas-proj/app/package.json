@@ -1,0 +1,12 @@
+{
+  "name": "commerance-api",
+  "version": "1.0.0",
+  "description": "SaaS Backend API",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
