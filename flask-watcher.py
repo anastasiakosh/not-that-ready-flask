@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key' 
@@ -19,19 +20,25 @@ def index():
         password = request.form.get('password')
         action = request.form.get('action')
 
-        if action == 'register' and username not in users_db:
-            users_db[username] = password
-            
-        if users_db.get(username) == password:
-            session['username'] = username
-        else:
-            error = "Invalid credentials or username taken!"
+        if action == 'register':
+            if username in users_db:
+                error = "Username already exists!"
+            elif len(password) < 5: 
+                error = "Password must be at least 5 characters long!"
+            else:
+                users_db[username] = generate_password_hash(password)
+                session['username'] = username
+                
+        elif action == 'login':
+            saved_hash = users_db.get(username)
+            if saved_hash and check_password_hash(saved_hash, password):
+                session['username'] = username
+            else:
+                error = "Invalid credentials!"
 
     if 'username' not in session:
-        # Flask сам ищет файл auth.html в папке templates/
         return render_template('auth.html', error=error)
         
-    # Flask сам ищет файл feed.html в папке templates/
     return render_template('feed.html', birds_data=birds_data, username=session['username'])
 
 @app.route('/logout')
