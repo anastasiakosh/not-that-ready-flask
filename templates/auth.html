@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BirdTok | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+        
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100vh; 
+            background: #f0f4f8; 
+            font-family: 'Inter', sans-serif; 
+            display: flex; justify-content: center; align-items: center; 
+        }
+        
+        .auth-container { 
+            width: 90%; max-width: 380px; 
+            background: #ffffff; 
+            color: #111111; 
+            border-radius: 24px; 
+            padding: 40px 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            text-align: center;
+            box-sizing: border-box;
+        }
+        
+        h3 { margin: 0 0 30px 0; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .alert { 
+            background: #ffe6e6; color: #d93025; border: 1px solid #f5c2c7;
+            padding: 12px; border-radius: 16px; margin-bottom: 20px; 
+            font-size: 0.9rem; font-weight: 500;
+        }
+        
+        input { 
+            width: 100%; padding: 16px 20px; margin-bottom: 16px; 
+            background: #f9f9f9; border: 1px solid #e0e0e0; color: #111; 
+            border-radius: 16px; font-size: 1rem; font-family: 'Inter', sans-serif;
+            box-sizing: border-box; outline: none; transition: all 0.3s ease;
+        }
+        
+        input::placeholder { color: #999; }
+        input:focus { border-color: #bbb; background: #fff; }
+        
+        .btn { 
+            width: 100%; padding: 16px; border: none; border-radius: 16px; 
+            font-size: 1rem; font-weight: 700; font-family: 'Inter', sans-serif; 
+            cursor: pointer; transition: 0.2s; 
+        }
+        
+        .btn-login { background: #111; color: #fff; margin-bottom: 12px; }
+        .btn-login:hover { background: #333; }
+        .btn-register { background: transparent; color: #555; border: 1px solid #ccc; }
+        .btn-register:hover { background: #f0f0f0; color: #111; border-color: #999; }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h3>BirdTok</h3>
+        
+        {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+        
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            
+            <button type="submit" name="action" value="login" class="btn btn-login">Login</button>
+            <button type="submit" name="action" value="register" class="btn btn-register">Create Account</button>
+        </form>
+    </div>
+</body>
+</html>
