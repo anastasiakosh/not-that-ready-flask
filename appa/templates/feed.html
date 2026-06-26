@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bird Feed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onclick="if(event.target.tagName !== 'A') nextBird()">
+    <a href="/logout" class="logout-btn">Logout ({{ username }})</a>
+    <div id="feed">
+        <div class="post">
+            <img id="bird-img" class="post-img" src="{{ birds_data[0].img }}" alt="Bird">
+            <div class="info">
+                <div id="bird-name" class="title">{{ birds_data[0].name }}</div>
+                <div id="bird-desc" class="desc">{{ birds_data[0].desc }}</div>
+                <span id="bird-loc" class="loc">{{ birds_data[0].loc }}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const birds = {{ birds_data | tojson | safe }};
+        let currentIndex = 0;
+        function nextBird() {
+            currentIndex = (currentIndex + 1) % birds.length;
+            document.getElementById('bird-img').src = birds[currentIndex].img;
+            document.getElementById('bird-name').innerText = birds[currentIndex].name;
+            document.getElementById('bird-desc').innerText = birds[currentIndex].desc;
+            document.getElementById('bird-loc').innerText = birds[currentIndex].loc;
+        }
+    </script>
+</body>
+</html>
