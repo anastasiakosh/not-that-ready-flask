@@ -19,13 +19,25 @@ def index():
             if not existing_user:
                 new_user = User(login=form_username, password="dummy_password")
                 db.session.add(new_user)
+                db.session.flush()
                 db.session.commit()
+                
+                session['user_id'] = new_user.id
+                session['username'] = new_user.login
+                return redirect(url_for('feed.show_feed'))
             else:
                 error = "Username already taken!"
                 return render_template('auth.html', error=error)
-        
-        session['username'] = form_username
-        return redirect(url_for('feed.show_feed'))
+            
+        elif action == 'login':
+            user = User.query.filter_by(login=form_username).first()
+            if user:
+                session['user_id'] = user.id
+                session['username'] = user.login
+                return redirect(url_for('feed.show_feed'))
+            else: 
+                error = "User not found! Register first."
+                return render_template('auth.html', error=error)
     
     return render_template('auth.html', error=error)
 
